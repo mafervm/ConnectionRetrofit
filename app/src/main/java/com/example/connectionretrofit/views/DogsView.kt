@@ -3,6 +3,8 @@ package com.example.connectionretrofit.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -12,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.connectionretrofit.viewmodels.DogViewModel
 
@@ -29,9 +32,12 @@ fun DogsView(dogViewModel: DogViewModel){
         AsyncImage(
             model = "${image}",
             contentDescription = null,
+            modifier = Modifier
+                .height(300.dp)
+                .width(300.dp)
         )
 
-        Text(text = "Imagen de perro")
+        Text(text = "DOG")
         Button(
             onClick = {
                 dogViewModel.fetchData()
