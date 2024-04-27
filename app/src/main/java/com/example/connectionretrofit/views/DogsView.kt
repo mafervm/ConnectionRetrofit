@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.tooling.preview.Preview
+import coil.compose.AsyncImage
 import com.example.connectionretrofit.viewmodels.DogViewModel
 
 
@@ -24,13 +25,19 @@ fun DogsView(dogViewModel: DogViewModel){
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
         ){
-        Text(text = "imagen url es ${image}")
+
+        AsyncImage(
+            model = "${image}",
+            contentDescription = null,
+        )
+
+        Text(text = "Imagen de perro")
         Button(
             onClick = {
                 dogViewModel.fetchData()
                       },
             colors = ButtonDefaults.buttonColors(Color(0xFF94B885))) {
-            Text(text = "imagen nueva")
+            Text(text = "Update")
         }
     }
 }
