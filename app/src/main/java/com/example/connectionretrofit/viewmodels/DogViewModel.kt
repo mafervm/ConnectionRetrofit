@@ -11,8 +11,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DogViewModel: ViewModel () {
-    var urlImage by mutableStateOf("")
-        private set
+    var icon_url by mutableStateOf("")
+    var id by mutableStateOf("")
+    var url by mutableStateOf("")
+    var value by mutableStateOf("")
+
 
     init {
         fetchData()
@@ -20,7 +23,10 @@ class DogViewModel: ViewModel () {
     fun fetchData(){
         viewModelScope.launch {
             withContext(Dispatchers.IO){
-                urlImage = API().getImagenAleatoria()
+                icon_url = API().getImagenAleatoria().get(0)
+                id = API().getImagenAleatoria().get(1)
+                url = API().getImagenAleatoria().get(2)
+                value = API().getImagenAleatoria().get(3)
             }
         }
     }

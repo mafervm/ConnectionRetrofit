@@ -22,7 +22,11 @@ import com.example.connectionretrofit.viewmodels.DogViewModel
 @Composable
 fun DogsView(dogViewModel: DogViewModel){
 
-    var image = dogViewModel.urlImage
+    var id = dogViewModel.id
+    var icon_url = dogViewModel.icon_url
+    var url = dogViewModel.url
+    var value = dogViewModel.value
+
 
     Column (modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -30,14 +34,18 @@ fun DogsView(dogViewModel: DogViewModel){
         ){
 
         AsyncImage(
-            model = "${image}",
+            model = "${url}",
             contentDescription = null,
             modifier = Modifier
                 .height(300.dp)
                 .width(300.dp)
         )
 
-        Text(text = "DOG")
+
+
+        Text(text = url)
+        Text(text = id)
+        Text(text = value)
         Button(
             onClick = {
                 dogViewModel.fetchData()

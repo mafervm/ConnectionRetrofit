@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitHelper {
     //Configurar retrofit , creamos el objeto retrofi
-    private val URL_BASE = "https://dog.ceo/api/"
+    private val URL_BASE = "https://api.chucknorris.io/jokes/random/"
         fun getRetrofitService(): ApiInterface {
             val retrofit = Retrofit.Builder()
                 .baseUrl(URL_BASE)
@@ -21,17 +21,25 @@ class API {
     //donde recopolaremos los datos y haremos validacion pertinentes.
     private val service = RetrofitHelper.getRetrofitService() /*
     instanciar el servicio retrofit de nuestro objet anterior*/
-    suspend fun getImagenAleatoria():String {
-        val msg:String
-        val response = service.imagenAleatoria()
+    suspend fun getImagenAleatoria():List<String> {
+        val icon_url: String
+        val id: String
+        val url: String
+        val value: String
+
+        val response = service.Chuck()
         /*obtenemos la respuesta y aplicamos la logica de que deseamos hacer con los campos*/
-        if(response.body()?.status.equals("success")){
-            msg = response.body()?.mensaje ?: ""
-        }else{
-            msg = "NO fue exitoso"
-        }
-        Log.d("API_PRUEBA", "status es " + response.body()?.status)
-        Log.d("API_PRUEBA ", "message es " + response.body()?.mensaje)
-        return msg
+
+        icon_url = response.body()?.icon_url ?: ""
+        id = response.body()?.id ?:""
+        url = response.body()?.url ?:""
+        value = response.body()?.value ?:""
+
+        Log.d("API_PRUEBA", "url es " + response.body()?.url)
+        Log.d("API_PRUEBA ", "imagw es " + response.body()?.icon_url)
+
+        val strings = listOf<String>(icon_url,id,url,value)
+
+        return strings
     }
 }
